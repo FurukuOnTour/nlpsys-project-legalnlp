@@ -22,15 +22,27 @@ Explain your model here how it works.
 
 | Label | Frequency |
 |--------|----------|
-| partially favorable | 0.365333 % |
-| unfavorable | 0.296000 % |
-| favorable | 0.224000 % |
-| other | 0.114667 % |
+| partially favorable | 36.5333 % |
+| unfavorable | 29.6000 % |
+| favorable | 22.4000 % |
+| other | 11.4667 % |
 
 ## Experiment setup
-- Which pre-trained model? How did you pretrain embeddings? 
-- Computer. How long? 
-- Hyperparameter tuning? Dropout? How many epochs? 
+First, we start training Conditonal Random Field (CRF) model using modify train and dev set (we change label to plain and verdict instead of favorbility) that we prepare for training and evaluation. We done this step to create a model that could help us automatically labeled where the verdict is in raw data.
+
+Second, we train and compete the result to find the best classifier model that could predict favorblility with most accuracy (F1) using full court record (contain both plain and verdict) as an input. In this process, we intend to train a model that could annotate favorbility instead of human annonator. We try 3 different model for our candidate; Logistic Regression, Convolutional Neural Network (CNN), and BERT (we use WangchanBERTa as a base for this task).
+    
+Third, we train and compete the result to find the best classifier model that could predict favorblility with most accuracy (F1) using only case's plain as an input. We also the same try 3 different model for our candidate with unchange parameter tuning; Logistic Regression, Convolutional Neural Network (CNN) with Thai National Corpus word embedding, and BERT (we use WangchanBERTa as a base for this task). 
+
+Both task use the same parameter and word embedding in the table under this paragragh. Both CNN and BERT use around 5-7 minute for training.
+
+| CNN | WangchanBERTa |
+|----------|---------------|
+| filters = 150 | learning_rate=3e-5 |
+| kernel_size = 45 | per_device_train_batch_size=96 |
+| hidden_dims = 150 | per_device_eval_batch_size=96 |
+| 100-unit TNC word embedding | num_train_epochs=90 |
+| max word len = 600 | drop_out = 0.4 |
 
 ## Results 
 How did it go?  + Interpret results. 
