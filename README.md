@@ -50,14 +50,14 @@ But after the experiment, the result from verdict-input classifier models are su
 ## Results 
 Our CRF model for sequence tagging is very successful with F1 score at 0.96 as well as WangchanBERTa that outperforms other models F1 score at 0.83 in plain-input classifier model. But in court-record-input classifier, it turns out that Logistic Regression outperforms other models with 0.76 of F1 score, better than WangchanBERTa F1 score at 0.74 or CNN at 0.66
 
-### Model comparison for plain-input classifier model
+### Model comparison for plain-input classifier model (for the verdict prediction task)
 | Model | Accuracy (F1) |
 |-------|----------|
 |Logistic regression | 78%|
 |CNN| 80% |
 |**WangchanBERTa** | **83%** |
 
-### Model comparison for court-record-input classifier model
+### Model comparison for court-record-input classifier model (for the verdict classification task)
 | Model | Accuracy (F1) |
 |-------|----------|
 |**Logistic regression** | **76%**|
