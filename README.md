@@ -64,7 +64,7 @@ Our CRF model for sequence tagging are very successful with F1 score at 0.96 as 
 |CNN| 66% |
 |WangchanBERTa | 74% |
 
-even though WangchanBERTa can do quite good on both task. it's still not perform at best as it could as there's a maximum input length in WangchanBERTa model, which is 256 tokens. We could change maximum input lenght to much more bigger number like 512 or 1024 as long as we don't have to manage CUDA memory in our Google Colab Session.
+Even though WangchanBERTa can do quite good on both task. it's still not perform at best as it could as there's a maximum input length in WangchanBERTa model, which is 256 tokens. We could change maximum input lenght to much more bigger number like 512 or 1024 as long as we don't have to manage CUDA memory in our Google Colab Session.
 
 ## Conclusion
 After using 375 samples of legal text of tort cases to do verdict identification, verdict classification, and verdict prediction tasks with various models, we have found that our CRF model for verdict identification was successful with an F1 score of 96%, and WangchanBERTa performed very well in verdict perdiction task with an F1 score of 83%. However, in the verdict classification task, Logistic Regression was slightly better than WangchanBERTa and much better than CNN with an F1 score of 76%, which is still not quite impressive for us. We need to study further for verdict classification task in order that we can automate the data labeling process.
