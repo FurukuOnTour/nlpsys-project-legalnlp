@@ -56,9 +56,9 @@ Our CRF model for sequence tagging are very successful with F1 score at 0.96 as 
 ### Model comparison for court-record-input classifier model
 | Model | Accuracy (F1) |
 |-------|----------|
-|Logistic regression | **76%**|
+|**Logistic regression** | **76%**|
 |CNN| 66% |
-|**WangchanBERTa** | 74% |
+|WangchanBERTa | 74% |
 
 ## Conclusion
 - What task? What did we do? 
