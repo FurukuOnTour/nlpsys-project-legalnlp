@@ -48,7 +48,7 @@ Both tasks use the same hyperparameters and word embedding in the table under th
 But after the experiment, the result from verdict-input classifier models are surprisingly not impressive for us. We presume that it is because verdicts usually state only the court stand they judgement, or draw back to use old verdicts from trial court or appellate court without any further information. To understand what the supreme court really judge, we need to look back at appellate court judgement or even until the first judgement from trial court. To solve this problem, we train and compare another classifier model that could predict favorblility using full court record (contain both plain and verdict) as an input with the same candidate models and hyperparameter tuning. We presume that by using full court record, the models should understand more context of the case and can predict more precisely.
 
 ## Results 
-Our CRF model for sequence tagging are very successful with F1 score at 0.96 as well as WangchanBERTa that best other models F1 score at 0.83 in plain-input classifier model. But in court-record-input classifier, it turns out that Logistic Regression is the champion with 0.76 of F1 score, better than WangchanBERTa F1 score at 0.74 or CNN at 0.66
+Our CRF model for sequence tagging is very successful with F1 score at 0.96 as well as WangchanBERTa that outperforms other models F1 score at 0.83 in plain-input classifier model. But in court-record-input classifier, it turns out that Logistic Regression outperforms other models with 0.76 of F1 score, better than WangchanBERTa F1 score at 0.74 or CNN at 0.66
 
 ### Model comparison for plain-input classifier model
 | Model | Accuracy (F1) |
@@ -64,7 +64,7 @@ Our CRF model for sequence tagging are very successful with F1 score at 0.96 as 
 |CNN| 66% |
 |WangchanBERTa | 74% |
 
-Even though WangchanBERTa can do quite good on both task. it's still not perform at best as it could as there's a maximum input length in WangchanBERTa model, which is 256 tokens. We could change maximum input lenght to much more bigger number like 512 or 1024 as long as we don't have to manage CUDA memory in our Google Colab Session.
+Even though WangchanBERTa can do quite well on both task. It still cannot perform at best as it could because there is a maximum input length in WangchanBERTa model, which is 256 tokens. We could change maximum input length to much bigger number like 512 or 1024 as long as we do not have to manage CUDA memory in our Google Colab Session, so we have tried our best balancing between CUDA memory and the model's performance.
 
 ## Conclusion
 After using 375 samples of legal text of tort cases to do verdict identification, verdict classification, and verdict prediction tasks with various models, we have found that our CRF model for verdict identification was successful with an F1 score of 96%, and WangchanBERTa performed very well in verdict perdiction task with an F1 score of 83%. However, in the verdict classification task, Logistic Regression was slightly better than WangchanBERTa and much better than CNN with an F1 score of 76%, which is still not quite impressive for us. We need to study further for verdict classification task in order that we can automate the data labeling process.
