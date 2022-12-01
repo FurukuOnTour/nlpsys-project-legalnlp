@@ -1,4 +1,4 @@
-# Legal NLP: Court Judgement Prediction Models
+# Legal NLP: Predicting Decisions of Tort Cases in The Supreme Court of Thailand
 
 ## Introduction
 
