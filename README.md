@@ -9,10 +9,10 @@
   
   Automatic Judgement Forecasting for Pending Applications of the European Court of Human Rights (Medvedeva et al., 2021) used 3 models: SVM, H-BERT, and LEGAL-BERT (BERT pretrained with various legal texts) to predict cases from the European Court of Human Rights into 2 labels: "violation" and "non-violation". Due to the length of the case text, SVM performed better than H-BERT and LEGAL-BERT with an F1 score around 61-65%.
   
-  In this project, we use 375 samples of legal text of tort cases judged and published by The Supreme Court of Thailand. Those cases are labeled into 4 labels: "favorable", "partially favorable", "unfavorable", and "other" by us. Those samples are used in 3 tasks: verdict identification, verdict classification, verdict prediction using case's facts. The models used in the verdict identification task is CRF. The models used in the verdict classification and the verdict prediction tasks are Logistic Regression, CNN, and WangchanBERTa (BERT pretrained with Thai text). The result is that in verdict prediction task, WangchanBERTa outperformed other models, while in verdict classification tasks, Logistic Regression was slightly better than WangchanBERTa and much better than CNN.
+  In this project, we use 375 samples of legal text of tort cases judged and published by The Supreme Court of Thailand. Those cases are labeled into 4 labels: "favorable", "partially favorable", "unfavorable", and "other" by us. Those samples are used in 3 tasks: verdict identification, verdict classification, verdict prediction using case's plains. The models used in the verdict identification task is CRF. The models used in the verdict classification and the verdict prediction tasks are Logistic Regression, CNN, and WangchanBERTa (BERT pretrained with Thai text). The result is that in the verdict prediction task, WangchanBERTa outperformed other models, while in the verdict classification task, Logistic Regression was slightly better than WangchanBERTa and much better than CNN.
 
 ## Our Approach
-In this project, we have divided our task into 3 tasks: verdict identification, verdict classification, verdict prediction using case's facts.
+In this project, we have divided our task into 3 tasks: verdict identification, verdict classification, verdict prediction.
 
 1. Verdict identification: This model takes a whole text of a tort case as an input. It will identify which part of the text is the verdict of the case and return in IOB format. We used CRF to achieve this task.
 2. Verdict classification: This model takes a verdict part of a tort case as an input. It will classify the verdict into 4 labels: "favorable", "partially favorable", "unfavorable", and "other". We experimented this task with a few types of machine learning algorithms: Logistic Regression, Convolutional Neural Network (CNN) and WangchanBERTa.
@@ -65,5 +65,4 @@ Our CRF model for sequence tagging are very successful with F1 score at 0.96 as 
 |WangchanBERTa | 74% |
 
 ## Conclusion
-- What task? What did we do? 
-- Summary of results.
+After using 375 samples of legal text of tort cases to do verdict identification, verdict classification, and verdict prediction tasks with various models, we have found that our CRF model for verdict identification was successful with an F1 score of 96%, and WangchanBERTa performed very well in verdict perdiction task with an F1 score of 83%. However, in the verdict classification task, Logistic Regression was slightly better than WangchanBERTa and much better than CNN with an F1 score of 76%, which is still not quite impressive for us. We need to study further for verdict classification task in order that we can automate the data labeling process.
