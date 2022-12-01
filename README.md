@@ -1,10 +1,9 @@
 # Legal NLP: Predicting Decisions of Tort Cases in The Supreme Court of Thailand
 
 ## Introduction
-
   Due to high cost of consulting legal experts and prolonged court proceedings, it is difficult for common people to access useful legal information for each of their own cases. Therefore, we have developed our court judgement prediction model in order that anyone can use this as an assistance to make decisions before starting any court proceedings. This will hopefully lower court's workload so that the court can put their effort into more complex cases.
   
-  According to The 2019-2021 Statistical Report of the Court of Justice of Thailand, torts are one among top 5 causes of action in new cases in The Supreme Court of Thailand, so in this research, we use the legal text of tort cases judged and published by The Supreme Court of Thailand.
+  According to The 2019-2021 Statistical Report of the Court of Justice of Thailand, torts are the one among top 5 causes of action in new cases in The Supreme Court of Thailand, so in this research, we use the legal text of tort cases judged and published by The Supreme Court of Thailand.
   
   Predicting Brazilian Court Decisions (Lage-Freitas et al., 2022) used various machine learning algorithms, e.g. LSTM, GRU, BiLSTM, CNN, XGBoost, SVM, Random Forest, BERT-Imbau (BERT model pretrained with Brazilian Portuguese text), etc., to predict cases from a Brazilian court into 3 labels: “yes”, for fully favourable decisions; “partial”, for partially favourable decisions; “no”, when the appeal was denied. Due to the size of the dataset (4,043 cases), the deep learning models, i.e., LSTM, GRU, BiLSTM, and CNN, were outperformed by classic machine learning models. However, only BERT-imbau is an exception with an F1 score of 73.4%. When the labels decreased into 2 labels: "yes" and "no", XGBoost outperformed most models with an F1 score of 80.2%.
   
@@ -12,13 +11,12 @@
   
   In this project, we use 375 samples of legal text of tort cases judged and published by The Supreme Court of Thailand. Those cases are labeled into 4 labels: "favorable", "partially favorable", "unfavorable", and "other" by us. Those samples are used in 3 tasks: verdict identification, verdict classification, verdict prediction using case's facts. The models used in the verdict identification task is CRF. The models used in the verdict classification and the verdict prediction tasks are Logistic Regression, CNN, and WangchanBERTa (BERT pretrained with Thai text). The result is that in verdict prediction task, WangchanBERTa outperformed other models, while in verdict classification tasks, Logistic Regression was slightly better than WangchanBERTa and much better than CNN.
 
-## Our Approach/Methodology/Model 
-Explain your model here how it works. 
+## Our Approach
+In this project, we have divided our task into 3 tasks: verdict identification, verdict classification, verdict prediction using case's facts.
 
-- Input is ... 
-- Output is ...
-- Model description 
-- Equation as necessary e.g. $\alpha_3$ 
+1. Verdict identification: This model takes a whole text of a tort case as an input. It will identify which part of the text is the verdict of the case and return in IOB format. We used CRF to achieve this task.
+2. Verdict classification: This model takes a verdict part of a tort case as an input. It will classify the verdict into 4 labels: "favorable", "partially favorable", "unfavorable", and "other". We experimented this task with a few types of machine learning algorithms: Logistic Regression, Convolutional Neural Network (CNN) and WangchanBERTa.
+3. Verdict prediction: This model takes a case's plain part of a tort case as an input. It will classify the verdict into 4 labels: "favorable", "partially favorable", "unfavorable", and "other". We also experimented this task with Logistic Regression, Convolutional Neural Network (CNN) and WangchanBERTa.
 
 ## Dataset
 We used raw data judged and published by The Supreme Court of Thailand. Labeled them up to the favorbility for the plaintiff in each case by human annotator using Datasuar.ai as a tool for annotation. All data will only be labeled just one between these favorbility; Favorable: if the judgement favor plaintiff and they compensation and amount of defandants from the start are approve and unchange by the court, Patially Favorable: if the judgement favor plaintiff but they compensation or amount of defandants from the start are changed by the court judgement, Unfavorable: if the case has been withdrawn by the court, and Others: if the case are decide to rejudge, or the court withdrawn plaintiff accusation because of legal reasons (like lack of evidence, or claim prescibed). After cleaning data, our total data set is 375 tokens, 137 tokens is partially favorable, 111 tokens is unfavorable, 84 tokens is favorable, and last 43 is other. Then, we devided them into training set and develop set by 80:20 (which make tokens in traing set become 300 while dev set is 75)
