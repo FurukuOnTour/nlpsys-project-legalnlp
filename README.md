@@ -29,7 +29,7 @@ We used raw data judged and published by The Supreme Court of Thailand. We label
 | other | 11.4667 % |
 
 ## Experiment setup
-First, we start train Conditonal Random Field (CRF) model using modify train and dev set (we change label to plain and verdict instead of favorbility) that we prepare for training and evaluation. We do this step to create a model that could help us automatically labeled where the verdict is in raw data.
+First, we start train Conditonal Random Field (CRF) model using modify train and dev set (we change label to plain and verdict instead of favorbility) that we prepare for training and evaluation both normal evaluation and phrase level evaluation. We do this step to create a model that could help us automatically labeled where the verdict is in raw data.
 
 Second, we train and compare the result to find the best classifier model that could predict favorblility with most accuracy (F1) using only verdict as an input. In this process, we intend to train a model that could annotate favorbility instead of human annonator. We try 3 different models for our candidate: Logistic Regression, Convolutional Neural Network (CNN) with Thai National Corpus word embedding, and BERT (we use WangchanBERTa as a base for this task).
     
@@ -41,14 +41,14 @@ Both tasks use the same hyperparameters and word embedding in the table under th
 |----------|---------------|
 | filters = 150 | learning_rate=3e-5 |
 | kernel_size = 45 | per_device_train_batch_size=96 |
-| hidden_dims = 150 | per_device_eval_batch_size=96 |
-| 100-unit TNC word embedding | num_train_epochs=90 |
-| max word len = 600 | drop_out = 0.4 |
+| hidden_dims = 150 | num_train_epochs=90 |
+| 100-unit TNC word embedding | drop_out = 0.4 |
+| max word len = 600 |  |
 
 But after the experiment, the result from verdict-input classifier models are surprisingly not impressive for us. We presume that it is because verdicts usually state only the court stand they judgement, or draw back to use old verdicts from trial court or appellate court without any further information. To understand what the supreme court really judge, we need to look back at appellate court judgement or even until the first judgement from trial court. To solve this problem, we train and compare another classifier model that could predict favorblility using full court record (contain both plain and verdict) as an input with the same candidate models and hyperparameter tuning. We presume that by using full court record, the models should understand more context of the case and can predict more precisely.
 
 ## Results 
-Our CRF model for sequence tagging is very successful with F1 score at 0.96 as well as WangchanBERTa that outperforms other models F1 score at 0.83 in plain-input classifier model. But in court-record-input classifier, it turns out that Logistic Regression outperforms other models with 0.76 of F1 score, better than WangchanBERTa F1 score at 0.74 or CNN at 0.66
+Our CRF model for sequence tagging is very successful with F1 score at 0.96 and phrase level F1 score at 0.75, as well as WangchanBERTa that outperforms other models F1 score at 0.83 in plain-input classifier model. But in court-record-input classifier, it turns out that Logistic Regression outperforms other models with 0.76 of F1 score, better than WangchanBERTa F1 score at 0.74 or CNN at 0.66
 
 ### Model comparison for plain-input classifier model (for the verdict prediction task)
 | Model | Accuracy (F1) |
