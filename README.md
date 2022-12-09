@@ -39,10 +39,11 @@ Both tasks use the same hyperparameters and word embedding in the table under th
 
 | CNN | WangchanBERTa |
 |----------|---------------|
-| filters = 150 | learning_rate=3e-5 |
-| kernel_size = 45 | per_device_train_batch_size=96 |
-| hidden_dims = 150 | num_train_epochs=90 |
-| 100-unit TNC word embedding | drop_out = 0.4 |
+| filters = 150 | learning_rate = 3e-5 |
+| kernel_size = 45 | per_device_train_batch_size = 96 |
+| hidden_dims = 150 | num_train_epochs = 90 |
+| drop_out = 0.4 | tokenizer max_length = 256 tokens |
+| 100-unit TNC word embedding |  |
 | max word len = 600 |  |
 
 But after the experiment, the result from verdict-input classifier models are surprisingly not impressive for us. We presume that it is because verdicts usually state only the court stand they judgement, or draw back to use old verdicts from trial court or appellate court without any further information. To understand what the supreme court really judge, we need to look back at appellate court judgement or even until the first judgement from trial court. To solve this problem, we train and compare another classifier model that could predict favorblility using full court record (contain both plain and verdict) as an input with the same candidate models and hyperparameter tuning. We presume that by using full court record, the models should understand more context of the case and can predict more precisely.
